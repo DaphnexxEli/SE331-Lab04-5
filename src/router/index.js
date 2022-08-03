@@ -5,13 +5,17 @@ import EventDetails from '@/views/event/EventDetailView.vue'
 import EventRegister from '@/views/event/EventRegister.vue'
 import EventEdit from '@/views/event/EditView.vue'
 import Eventlayout from '@/views/event/EventLayoutView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
+import NetWorkError from '@/views/NetworkErrorView.vue'
+import EventAirlineDetail from '@/views/event/EventAirlineDetail.vue'
+
 const routes = [{
         path: '/',
         name: 'EventList',
         component: EventListView,
         props: (route) => ({
             page: parseInt(route.query.page) || 1,
-            morepage: parseInt(route.query.morepage) || 1
+            morepage: parseInt(route.query.morepage) || 5
         })
     },
     {
@@ -30,6 +34,11 @@ const routes = [{
                 component: EventDetails
             },
             {
+                path: 'airlineDetails',
+                name: 'EventAirlineDetail',
+                component: EventAirlineDetail
+            },
+            {
                 path: 'register',
                 name: 'EventRegister',
                 props: true,
@@ -42,6 +51,22 @@ const routes = [{
                 component: EventEdit
             }
         ]
+    },
+    {
+        path: '/404/:resource',
+        name: '404Resource',
+        component: NotFoundView,
+        props: true
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: 'NotFound',
+        component: NotFoundView
+    },
+    {
+        path: '/network-error',
+        name: 'NetworkError',
+        component: NetWorkError
     },
     {
         path: '/event/:id/register',
